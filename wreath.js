@@ -8,6 +8,22 @@ var vertices = [
     // Your code goes here.
 
 
+    vec2(0, 0),
+    vec2(-2.2, 10),
+    vec2(-4, -5.5),
+    vec2(-2.5, -6),
+    vec2(-1.6, 3),
+    vec2(-1, 0),
+    vec2(0, 0),
+
+    // vec2( -5, -5 ),
+    // vec2( -4, -5 ),
+    // vec2( 0, 0 ),
+    // vec2( 2, 3 ),
+    // vec2( 3, 2 ),
+    // vec2( 1, 5 ),
+    // vec2( -5, -5 )
+
 ];
 
 var CTM; 
@@ -58,12 +74,26 @@ function render() {
     // Instead of that, you should draw this wreath only by transformations. 
     // Your code goes here:
    
+    var theta;
 
+    for(var i = 0; i < 5; i++)
+    {
+        theta = (72 * i) * (Math.PI / 180);
+        // CTM = rotateX(theta, 1, 0, 0);
+        // CTM = rotateY(theta, 0, 1, 0);
+        CTM = rotateZ(theta, 0, 0, 0);
+        CTM = scalem(0.05,0.05,0.05);
+        // rotate(theta, CTM);
+        //CTM = CTM.concat(rotate(i * 1.25664, 0, 0, 0));
+        gl.uniformMatrix4fv(CTMLoc, false, flatten(CTM));
+        gl.drawArrays(gl.LINE_STRIP, 0, 7);
+    }
+    
 
     // You do not change any thing below this line.
     // You may need to put codes below in for loop(s). 
     // Pass CTM to CTMLoc
-    gl.uniformMatrix4fv(CTMLoc, false, flatten(CTM));
+    //gl.uniformMatrix4fv(CTMLoc, false, flatten(CTM));
     // Use 7 vertices to draw one branch
-    gl.drawArrays(gl.LINE_STRIP, 0, 7);
+    //gl.drawArrays(gl.LINE_STRIP, 0, 7);
 }
